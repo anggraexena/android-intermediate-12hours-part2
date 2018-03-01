@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_16sdp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txMatkul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Teknik Kompilasi"
+            android:textColor="@color/colorGray800"
+            android:textSize="@dimen/_14sdp" />
+
+        <TextView
+            android:id="@+id/txHari"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Senin"
+            android:textColor="@color/colorGray800"
+            android:textSize="@dimen/_12sdp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/txKelas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="Kelas : 4IA01"
+        android:textColor="@color/colorGray500"
+        android:textSize="@dimen/_12sdp" />
+
+    <TextView
+        android:id="@+id/txRuang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="Ruang : D611"
+        android:textColor="@color/colorGray500"
+        android:textSize="@dimen/_12sdp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/colorGray500"/>
+
+</LinearLayout>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gungde.intermediate12hours_2.SignupActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_splash" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:padding="@dimen/_24sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/open_sans"
+                    android:text="Register"
+                    android:textColor="@color/colorGray200"
+                    android:textSize="@dimen/_36sdp" />
+
+                <EditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:background="@drawable/bg_oval_white_corner_transparant"
+                    android:fontFamily="@font/open_sans"
+                    android:gravity="center"
+                    android:hint="Email Address"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp"
+                    android:textColorHint="@color/colorGray400"
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_oval_white_corner_transparant"
+                    android:fontFamily="@font/open_sans"
+                    android:gravity="center"
+                    android:hint="Password"
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/white"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/colorGray400"
+                    android:padding="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/edtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_oval_white_corner_transparant"
+                    android:fontFamily="@font/open_sans"
+                    android:gravity="center"
+                    android:hint="Name"
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/white"
+                    android:inputType="textCapWords"
+                    android:textColorHint="@color/colorGray400"
+                    android:padding="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/edtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_oval_white_corner_transparant"
+                    android:fontFamily="@font/open_sans"
+                    android:gravity="center"
+                    android:hint="Phone Number"
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/white"
+                    android:inputType="number"
+                    android:textColorHint="@color/colorGray400"
+                    android:padding="@dimen/_12sdp" />
+
+                <Button
+                    android:id="@+id/btnSignup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_24sdp"
+                    android:background="@drawable/bg_oval_primary"
+                    android:fontFamily="@font/open_sans"
+                    android:gravity="center"
+                    android:text="Sign Up"
+                    android:textSize="@dimen/_16sdp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:textColorHint="@color/colorGray200" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
