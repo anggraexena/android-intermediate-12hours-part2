@@ -34,14 +34,22 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val pref = getSharedPreferences("MYAPP", Context.MODE_PRIVATE)
-        txWelcome.text = "Halo ${pref.getString("name",null)}"
+        txWelcome.text = "Halo ${pref.getString("name", null)}"
 
         swipeRefresh.setOnRefreshListener(this)
-        setRecyclerView()
 
         btnAdd.setOnClickListener {
             val i = Intent(this@MainActivity, AddJadwalActivity::class.java)
             startActivity(i)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        swipeRefresh.post {
+            rvList.visibility = View.GONE
+            txEmpty.visibility = View.GONE
+            setRecyclerView()
         }
     }
 
@@ -56,11 +64,13 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         val call = api.getJadwals()
         call.enqueue(object : Callback<ArrayList<Jadwal>> {
             override fun onResponse(call: Call<ArrayList<Jadwal>>?, response: Response<ArrayList<Jadwal>>?) {
-                if(response!!.body().isNotEmpty()){
-                    mAdapter = ListAdapter(response.body(),this@MainActivity, ProgressDialogManager(this@MainActivity))
+                if (response!!.body().isNotEmpty()) {
+                    mAdapter = ListAdapter(response.body(), this@MainActivity, ProgressDialogManager(this@MainActivity))
                     rvList.adapter = mAdapter
+                    rvList.visibility = View.VISIBLE
                     txEmpty.visibility = View.GONE
-                }else{
+                } else {
+                    rvList.visibility = View.GONE
                     txEmpty.visibility = View.VISIBLE
                 }
                 swipeRefresh.isRefreshing = false
@@ -77,6 +87,8 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     override fun onRefresh() {
         setRecyclerView()
     }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

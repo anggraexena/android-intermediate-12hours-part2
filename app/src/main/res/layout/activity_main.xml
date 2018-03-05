@@ -22,9 +22,9 @@
                 android:id="@+id/txWelcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
                 android:ellipsize="end"
                 android:fontFamily="@font/open_sans_semibold"
+                android:maxLines="1"
                 android:text="Halo Selamat Datang"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_14sdp" />
@@ -33,15 +33,26 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.example.gungde.intermediate12hours_2.MainActivity"
-        tools:showIn="@layout/activity_main">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/txEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_8sdp"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="Tidak ada data\nTambah data terlebih dahulu"
+            android:textColor="@color/colorGray800"
+            android:textSize="@dimen/_10sdp"
+            android:visibility="gone"
+            android:background="@color/colorOrange50"/>
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh"
@@ -55,19 +66,7 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <TextView
-            android:id="@+id/txEmpty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="Tidak ada data\nTambah data terlebih dahulu"
-            android:textColor="@color/colorGray800"
-            android:textSize="@dimen/_12sdp"
-            android:visibility="gone"/>
-
-    </RelativeLayout>
+    </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnAdd"

@@ -19,7 +19,6 @@ import android.widget.Toast
 import com.example.gungde.intermediate12hours_2.AddJadwalActivity
 import com.example.gungde.intermediate12hours_2.BuildConfig
 import com.example.gungde.intermediate12hours_2.model.Base
-import com.example.gungde.intermediate12hours_2.tools.ProgressDialogManager
 import com.reon.app.reon.api.ApiService
 import retrofit2.Call
 import retrofit2.Callback
@@ -42,9 +41,9 @@ class ListAdapter(private val jadwals: ArrayList<Jadwal>,private val activity : 
     override fun onBindViewHolder(holder: ListAdapter.ListHolder, position: Int) {
         val jadwal = jadwals[position]
         holder.view.txHari.text = jadwal.hari
-        holder.view.txKelas.text = jadwal.kelas
+        holder.view.txKelas.text = "Kelas : " + jadwal.kelas
+        holder.view.txRuang.text = "Ruang : " + jadwal.ruang
         holder.view.txMatkul.text = jadwal.matkul
-        holder.view.txRuang.text = jadwal.ruang
         holder.view.setOnLongClickListener(object : View.OnLongClickListener {
             override fun onLongClick(p0: View?): Boolean {
                 showAlert(jadwal, position)
