@@ -18,9 +18,13 @@ interface ApiService {
     @GET("api/jadwals")
     fun getJadwals(): Call<ArrayList<Jadwal>>
 
+    @GET("api/jadwals/{userId}")
+    fun getJadwalByUserId(@Path("userId") userId: String): Call<ArrayList<Jadwal>>
+
     @FormUrlEncoded
     @POST("api/jadwals")
-    fun addJadwal(@Field("kelas") kelas: String,
+    fun addJadwal(@Field("userId") userId: String,
+                  @Field("kelas") kelas: String,
                   @Field("hari") hari: String,
                   @Field("matkul") matkul: String,
                   @Field("ruang") ruang: String): Call<Base>

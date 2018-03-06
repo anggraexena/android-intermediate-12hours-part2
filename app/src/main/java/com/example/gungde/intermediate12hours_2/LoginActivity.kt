@@ -46,9 +46,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun doLogin() {
+        // Disini program ngecek dulu kalo edittextnya kosong apa ngga
+        // Kalo ada salah satu yg kosong, dia bakal keluar Alert
         if (edtEmail.text.toString() == "" || edtPassword.text.toString() == "") {
             showAlert("Kolom tidak boleh kosong!")
         } else {
+            // kalo aman, dia masuk ke method login
             login(edtEmail.text.toString(), edtPassword.text.toString())
         }
     }
@@ -56,19 +59,29 @@ class LoginActivity : AppCompatActivity() {
     private fun login(email: String, password: String) {
         progressDialog?.show()
         val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl(getString(R.string.BASE_URL))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         val api = retrofit.create(ApiService::class.java)
         val call = api.login(email, password)
         call.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>?, response: Response<User>?) {
+                // Kalo Internet aman, Server gaada gangguan, dia masuk ke method ini
+                // Disini si program ngecek status == true atau false
                 if (response!!.body().status) {
+                    // Ini yang terjadi jika status = true
+                    // Disini program juga akan menyimpan beberapa data jika login berhasil
+                    // Disini dia menyimpan nilai boolean berupa true ke dalam Session
+                    // Dia juga menyimpan nama dan userId akun User yang login
+                    // Dia simpen semua itu ke dalam cache dengan tujuan jika user keluar dari
+                    // aplikasi, si user ga perlu login lagi karena sessionnya sudah disimpan berupa
+                    // true
                     val pref = getSharedPreferences("MYAPP", Context.MODE_PRIVATE)
                     val editor = pref.edit()
-                    editor.putBoolean("login", true)
-                    editor.putString("name", response.body().data.name)
-                    editor.apply()
+                    editor.putBoolean("login", true) // ini yang buat user ga perlu login lagi
+                    editor.putString("name", response.body().data.name) // ini namanya disimpen
+                    editor.putString("userId", response.body().data._id) // ini idnya juga disimpen
+                    editor.apply() // nah ini metode ini yang bakal nyimpen datanya ke dalam session
                     val i = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(i)
                     finish()

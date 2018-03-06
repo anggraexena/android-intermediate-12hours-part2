@@ -10,5 +10,6 @@ data class Jadwal(
 		val hari: String, //Rabu
 		val matkul: String, //Jaringan Komputer Lanjut
 		val ruang: String, //E324
-		val __v: Int //0
+		val __v: Int, //0
+		val userId : String
 )

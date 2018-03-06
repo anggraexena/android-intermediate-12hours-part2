@@ -44,6 +44,8 @@ class ListAdapter(private val jadwals: ArrayList<Jadwal>,private val activity : 
         holder.view.txKelas.text = "Kelas : " + jadwal.kelas
         holder.view.txRuang.text = "Ruang : " + jadwal.ruang
         holder.view.txMatkul.text = jadwal.matkul
+
+        // Method dibawah bikin listnya keluar Alert ketika dikliknya ditahan agak Lama
         holder.view.setOnLongClickListener(object : View.OnLongClickListener {
             override fun onLongClick(p0: View?): Boolean {
                 showAlert(jadwal, position)
@@ -56,42 +58,12 @@ class ListAdapter(private val jadwals: ArrayList<Jadwal>,private val activity : 
         return jadwals.size
     }
 
-    inner class ListHolder(val view: View) : RecyclerView.ViewHolder(view) {}
-
-    private fun showAlert(jadwal: Jadwal, position: Int) {
-        val builder = AlertDialog.Builder(activity)
-        val actions = arrayOf("Update", "Delete")
-        builder.setTitle("Choose an action")
-        builder.setItems(actions, object : DialogInterface.OnClickListener {
-            override fun onClick(dialog: DialogInterface?, pos: Int) {
-                when(pos){
-                    //Update
-                    0 -> {
-                        val i = Intent(activity, AddJadwalActivity::class.java)
-                        i.putExtra("id", jadwal._id)
-                        i.putExtra("hari", jadwal.hari)
-                        i.putExtra("kelas", jadwal.kelas)
-                        i.putExtra("matkul", jadwal.matkul)
-                        i.putExtra("ruang", jadwal.ruang)
-                        activity.startActivity(i)
-                    }
-
-                    //Delete
-                    1 -> {
-                        hapusJadwal(jadwal._id,position)
-                    }
-                }
-            }
-        })
-
-        val dialog = builder.create()
-        dialog.show()
-    }
+    inner class ListHolder(val view: View) : RecyclerView.ViewHolder(view)
 
     private fun hapusJadwal(id : String, position : Int) {
         progressDialog.show()
         val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl(activity.getString(R.string.BASE_URL))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         val api = retrofit.create(ApiService::class.java)
@@ -119,5 +91,39 @@ class ListAdapter(private val jadwals: ArrayList<Jadwal>,private val activity : 
 
     private fun showToast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showAlert(jadwal: Jadwal, position: Int) {
+        val builder = AlertDialog.Builder(activity)
+        val actions = arrayOf("Update", "Delete")
+        builder.setTitle("Choose an action")
+        builder.setItems(actions, object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, pos: Int) {
+                when(pos){
+                //Update
+                    0 -> {
+
+                        // Kodingan dibawah yang bakal pindah ke Halaman Add dan juga membawa
+                        // data yang mau diupdate
+
+                        val i = Intent(activity, AddJadwalActivity::class.java)
+                        i.putExtra("id", jadwal._id)
+                        i.putExtra("hari", jadwal.hari)
+                        i.putExtra("kelas", jadwal.kelas)
+                        i.putExtra("matkul", jadwal.matkul)
+                        i.putExtra("ruang", jadwal.ruang)
+                        activity.startActivity(i)
+                    }
+
+                //Delete
+                    1 -> {
+                        hapusJadwal(jadwal._id,position)
+                    }
+                }
+            }
+        })
+
+        val dialog = builder.create()
+        dialog.show()
     }
 }

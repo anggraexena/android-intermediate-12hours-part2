@@ -57,11 +57,18 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         swipeRefresh.isRefreshing = true
         rvList.layoutManager = LinearLayoutManager(this)
         val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl(getString(R.string.BASE_URL))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         val api = retrofit.create(ApiService::class.java)
-        val call = api.getJadwals()
+
+        // ini ada sedikit perubahan API
+        // jadi saya buat api getJadwal yang diambil dari UserId
+        // jadi outputnya hanya jadwal yang kalian input saja
+        // tidak tercampur dengan jadwal orang lain
+
+        val pref = getSharedPreferences("MYAPP", Context.MODE_PRIVATE)
+        val call = api.getJadwalByUserId(pref.getString("userId",null))
         call.enqueue(object : Callback<ArrayList<Jadwal>> {
             override fun onResponse(call: Call<ArrayList<Jadwal>>?, response: Response<ArrayList<Jadwal>>?) {
                 if (response!!.body().isNotEmpty()) {

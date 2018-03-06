@@ -1,5 +1,6 @@
 package com.example.gungde.intermediate12hours_2
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -63,11 +64,13 @@ class AddJadwalActivity : AppCompatActivity() {
     private fun tambahJadwal(matkul: String, hari: String, kelas: String, ruang: String) {
         progressDialog?.show()
         val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl(getString(R.string.BASE_URL))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         val api = retrofit.create(ApiService::class.java)
-        val call = api.addJadwal(kelas, hari, matkul, ruang)
+        val pref = getSharedPreferences("MYAPP", Context.MODE_PRIVATE)
+        val userId = pref.getString("userId", null)
+        val call = api.addJadwal(userId, kelas, hari, matkul, ruang)
         call.enqueue(object : Callback<Base> {
             override fun onResponse(call: Call<Base>?, response: Response<Base>?) {
                 if (response!!.body().status) {
@@ -91,7 +94,7 @@ class AddJadwalActivity : AppCompatActivity() {
     private fun updateJadwal(matkul: String, hari: String, kelas: String, ruang: String) {
         progressDialog?.show()
         val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl(getString(R.string.BASE_URL))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         val api = retrofit.create(ApiService::class.java)
